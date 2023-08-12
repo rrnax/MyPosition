@@ -8,6 +8,7 @@ import Book from './pages/Book';
 import About from './pages/About';
 import Tops from './pages/Tops';
 
+//Define routes for subpages.
 export default function App() {
   return (
     <BrowserRouter>
