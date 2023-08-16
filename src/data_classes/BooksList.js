@@ -1,3 +1,5 @@
+import BookObject from "./BookObject";
+
 class BooksList {
     constructor(list = [], amount = 0){
         this._list = list;
@@ -13,7 +15,7 @@ class BooksList {
     }
 
     set list(newList) {
-        if(Array.isArray(newList) && newList.length > 0){
+        if(Array.isArray(newList) && newList.every(item => item instanceof BookObject) && newList.length > 0){
             this._list = [...newList];
         } else {
             console.log("Invalid array");
@@ -26,6 +28,12 @@ class BooksList {
 
     get list() {
         return this._list;
+    }
+
+    addVolume(volume){
+        if(volume instanceof BookObject){
+            this._list.push(volume);
+        }
     }
 }
 

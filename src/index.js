@@ -7,21 +7,27 @@ import Result from './pages/Result';
 import Book from './pages/Book';
 import About from './pages/About';
 import Tops from './pages/Tops';
+import { AppProvider } from './AppContext';
+import BooksList from './data_classes/BooksList';
 
 //Define routes for subpages.
 export default function App() {
+  const listOfVolumes = new BooksList();
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<NavMenu />}>
-          <Route index element={<Search />}/>
-          <Route path='result' element={<Result />}/>
-          <Route path='book' element={<Book />}/>
-          <Route path='about' element={<About />}/>
-          <Route path='tops' element={<Tops />}/>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AppProvider value={listOfVolumes}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<NavMenu />}>
+            <Route index element={<Search />}/>
+            <Route path='result' element={<Result />}/>
+            <Route path='book' element={<Book />}/>
+            <Route path='about' element={<About />}/>
+            <Route path='tops' element={<Tops />}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AppProvider>
   )
 }
 
