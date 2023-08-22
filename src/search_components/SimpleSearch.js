@@ -1,6 +1,7 @@
 import React from "react";
 import BookObject from "../data_classes/BookObject";
 import AppContext from "../AppContext";
+import { Link } from "react-router-dom";
 
 class SimpleSearch extends React.Component {
     static contextType = AppContext;
@@ -9,51 +10,38 @@ class SimpleSearch extends React.Component {
         super(props);
         this.state = {
             dataFromInput: '',
-            apiResponse: '',            
-        };  
+            list: [ {
+                title: "Light",
+            }, {
+                title: "Dark",
+            }],
+        };
+
+        //Binding input functions
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    //Signs changing in search input
     async handleChange(event) {
         await this.setState({ dataFromInput: event.target.value });
     }
 
+    //Submission for search specific volume
     handleSubmit(event) {
         event.preventDefault();
         try{
-            this.downloadDataFromApi(this.props.searchUrl + this.state.dataFromInput + "&key=" + this.props.apiKey);
+            this.downloadDataFromApi();
         } catch (error) {
             console.log(error);
         }
     }
 
-    downloadDataFromApi(apiUrl){
-        fetch(apiUrl)
-        .then(response => {
-            if(!response.ok){
-                throw new Error("Incorrect response, bad response code.");
-            } else {
-               //this.setState({ apiResponse: response.json() });
-                return response.json();
-            }
-        })
-        .then(data => {
-            console.log(data);
-            this.context.amount = data.totalItems;
-            this.collectAllTopicVolumes();
-            // data.items.forEach(volume =>{
-            //     let newVolume = this.scrapVolume(volume);
-            //     this.context.addVolume(newVolume);
-            // })
-            // console.log(this.context);
-        })
-    }
-
-    async collectAllTopicVolumes(){
-        let laps = Math.floor(this.context.amount/40);
-        let rest = this.context.amount % 40;
-        for(let i = 0, j = 0; i < laps; i++, j+=10){
+    //We need loop for collect all volumes from google API
+    async downloadDataFromApi(){
+        let searchEnded = false;
+        let j = 0;
+        while(!searchEnded){
             await fetch(this.props.searchUrl 
                 + this.state.dataFromInput 
                 + "&startIndex=" 
@@ -68,11 +56,29 @@ class SimpleSearch extends React.Component {
                     return response.json();
                 }
             })
-        }
-        console.log(rest);
-        //&startIndex=${startIndex}&maxResults=${maxResults}
+            .then(data => {
+                if(data.items.length < 40){
+                    console.log(data);
+                    searchEnded = true;
+                } else {
+                    console.log(data);
+                }
+                j += 40;
+                this.copyVolumes(data.items);
+            })
+        } 
+        this.setState({ list: this.context.currentSearched.list });
     }
 
+    //Copy from api to current search
+    copyVolumes(volumeList){
+        volumeList.forEach(volume => {
+            let tempVolume = this.scrapVolume(volume);
+            this.context.currentSearched.addVolume(tempVolume);
+        })
+    }
+
+    //Only intrested information about volume for app
     scrapVolume(volume){
         return new BookObject(volume.volumeInfo.title,
             volume.volumeInfo.subtitle,
@@ -89,14 +95,27 @@ class SimpleSearch extends React.Component {
     }
 
     render(){
-       return (
-            <form onSubmit={ this.handleSubmit }>
-                <input type="text" value={ this.state.dataFromInput } placeholder="Wyszukaj" onChange={ this.handleChange } />
-                <input type="submit" value="Szukaj" />
-                <p></p>
-            </form>
+        return (
+            <div>
+                <form onSubmit={ this.handleSubmit }>
+                    <input type="text" value={ this.state.dataFromInput } placeholder="Wyszukaj" onChange={ this.handleChange } />
+                    <input type="submit" value="Szukaj" />
+                    <p></p>
+                </form>
+                {   this.state.list.map((book, index) => (
+                    <Mcomp key={index} id={index} title={book.title} />
+                    ))
+                }   
+            </div>
        )    
     }
+}
+
+
+function Mcomp(props){
+    return <div>
+            <Link to={`/result/${props.id}`}> { props.title } </Link>
+        </div>
 }
 
 export default SimpleSearch;
