@@ -22,6 +22,10 @@ class BooksList {
             this._list.push(volume);
         }
     }
+
+    clearList(){
+        this._list = [];
+    }
 }
 
 export default BooksList;

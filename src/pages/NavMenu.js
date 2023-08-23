@@ -8,7 +8,6 @@ class NavMenu extends React.Component {
             <nav>
                 <ul>
                     <Section name="/"/>
-                    <Section name="result/1"/>
                     <Section name="about"/>
                     <Section name="tops"/>
                 </ul>

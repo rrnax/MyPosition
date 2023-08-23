@@ -14,6 +14,8 @@ export default function App() {
   const listOfVolumes = new BooksList();
   const appState = {
     currentSearched: listOfVolumes,
+    apiKey: "AIzaSyCATX2IZDWb8Gk2m0bu8DbSCOVk3SVGTuQ",
+    searchUrl: "https://www.googleapis.com/books/v1/volumes?q=",
   }
 
   //Define routes for subpages.
