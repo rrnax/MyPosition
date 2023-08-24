@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AppContext from "../AppContext";
-import FilterSearchBar from "../nav_components/FilterSearchBar";
+import FilterSearchBar from "../result_components/FilterSearchBar";
 
 function Result() {
     const { page } = useParams();
@@ -12,15 +12,33 @@ function Result() {
     const [booksAmount, setBooksAmount] = useState(25);
 
     useEffect(() => {
+        console.log(JSON.parse(localStorage.getItem('list')));
+    })
+    // useEffect(() => {
+    //     // let tempList = localStorage.getItem('sessionList');
+    //     // context.currentSearched.list = JSON.parse(tempList);
+    //     console.log(context.currentSearched.list);
+    //     console.log(JSON.parse(localStorage.getItem('list')));
+    //     context.currentSearched.list = JSON.parse(localStorage.getItem('list'));
+    //     console.log(context.currentSearched.list);
+    // });
+
+    //Correct deal with array of books
+    useEffect(() => {
         let startBookIndex = (page - 1) * booksAmount;
         let endBookIndex =  page * booksAmount;
         let tempList = context.currentSearched.list.slice(startBookIndex, endBookIndex);
         setBooksOnPage(tempList);
-    }, [page]);
+    }, [page, booksAmount]);
+
+    const setAmountOfBooksOnPage = (amount) => {
+        setBooksAmount(amount);
+        console.log(amount);
+    };
 
     return (
         <div>
-            <FilterSearchBar pageNo={page} booksCount={booksAmount}/>
+            <FilterSearchBar setAmount={setAmountOfBooksOnPage} pageNo={page} booksCount={booksAmount}/>
             <h1>Results:</h1>
             <ul>
                 {booksOnPage.map((book, index) => (

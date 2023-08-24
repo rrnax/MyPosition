@@ -53,6 +53,7 @@ function SimpleSearch() {
           copyVolumes(data.items);
         })
     }
+    localStorage.setItem('list', JSON.stringify(context.currentSearched.list));
     navigate('/result/1');
   }
 

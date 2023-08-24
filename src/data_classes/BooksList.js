@@ -9,7 +9,7 @@ class BooksList {
         if(Array.isArray(newList) && newList.every(item => item instanceof BookObject) && newList.length > 0){
             this._list = [...newList];
         } else {
-            console.log("Invalid array");
+            this._list = [...newList];
         }
     }
 

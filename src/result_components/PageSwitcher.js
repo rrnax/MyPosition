@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../AppContext";
 import { useNavigate } from "react-router-dom";
 
-
+//Component to navigate via pages of result
 function PageSwitcher(props){
     const context = useContext(AppContext);
 
@@ -18,6 +18,7 @@ function PageSwitcher(props){
         navigate(`/result/${page}`);
     }
 
+    //Dynamic content in dependency
     return (
         <div>
             <button onClick={handleChangePage.bind(null, (+props.pageNo - 1))}> &lt; </button>
