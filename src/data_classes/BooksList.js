@@ -5,11 +5,11 @@ class BooksList {
         this._list = list;
     }
 
-    set list(newList) {
-        if(Array.isArray(newList) && newList.every(item => item instanceof BookObject) && newList.length > 0){
+    copyList(newList) {
+        if(Array.isArray(newList) && newList.length > 0){
             this._list = [...newList];
         } else {
-            this._list = [...newList];
+            console.log("Invalid array");
         }
     }
 

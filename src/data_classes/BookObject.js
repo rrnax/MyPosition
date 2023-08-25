@@ -13,18 +13,18 @@ class BookObject{
         publishDate,
         raitingsCount){
 
-        this._title = title;
-        this._subtitle = subtitle;
-        this._publisher = publisher;
-        this._authors = atuhors;
-        this._categories = categories;
-        this._description = description;
-        this._imagesLinks = imagesLinks;
-        this._language = language;
-        this._pageAmount = pageAmount;
-        this._printType = printType;
-        this._publishDate = publishDate;
-        this._raitingCount = raitingsCount;
+        title === undefined ? this._title = null : this._title = title;
+        subtitle === undefined ? this._subtitle = null : this._subtitle = subtitle;
+        publisher === undefined ? this._publisher = null : this._publisher = publisher;
+        atuhors === undefined ? this._authors = null : this._authors = atuhors;
+        categories === undefined ? this._categories = null : this._categories = categories;
+        description === undefined ? this._description = null : this._description = description;
+        imagesLinks === undefined ? this._imagesLinks = null : this._imagesLinks = imagesLinks;
+        language === undefined ? this._language = null : this._language = language;
+        pageAmount === undefined ? this._pageAmount = null : this._pageAmount = pageAmount;
+        printType === undefined ? this._printType = null : this._printType = printType;
+        publishDate === undefined ? this._publishDate = null : this._publishDate = publishDate;
+        raitingsCount === undefined ? this._raitingCount = null : this._raitingCount = raitingsCount;
     }
 
     get title(){

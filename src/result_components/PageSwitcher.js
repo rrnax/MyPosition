@@ -10,9 +10,17 @@ function PageSwitcher(props){
 
     const navigate = useNavigate();
 
+    //Calculate end page
     useEffect(() => {
         setPagesEndIndex(Math.floor(+context.currentSearched.list.length/+props.booksCount) + 1);
-    }, [])
+        if(pagesEndIndex < props.pageNo){
+            console.log(pagesEndIndex);
+            if(pagesEndIndex === "0"){
+                setPagesEndIndex(1);
+            }
+            navigate(`/result/${pagesEndIndex}`);
+        }
+    }, [pagesEndIndex]);
 
     const handleChangePage = (page) => {
         navigate(`/result/${page}`);
@@ -21,7 +29,7 @@ function PageSwitcher(props){
     //Dynamic content in dependency
     return (
         <div>
-            <button onClick={handleChangePage.bind(null, (+props.pageNo - 1))}> &lt; </button>
+            {props.pageNo - 1 > 0 ? <button onClick={handleChangePage.bind(null, (+props.pageNo - 1))}> &lt; </button> : null}
             {props.pageNo > 2 ? <button onClick={handleChangePage.bind(null, 1)}> 1 </button> : null}
             {props.pageNo > 3 ? <p> ... </p> : null}
             {props.pageNo > 1 ? <button onClick={handleChangePage.bind(null, (+props.pageNo - 1))}> {+props.pageNo - 1} </button> : null}
@@ -29,7 +37,7 @@ function PageSwitcher(props){
             {pagesEndIndex - 1 > props.pageNo ? <button onClick={handleChangePage.bind(null, (+props.pageNo + 1))}> {(+props.pageNo + 1)} </button> : null}
             {pagesEndIndex - 3 > props.pageNo ? <p>...</p> : null}
             {pagesEndIndex - 2 > props.pageNo ? <button onClick={handleChangePage.bind(null, pagesEndIndex)}> {pagesEndIndex} </button> : null}
-            <button onClick={handleChangePage.bind(null, (+props.pageNo + 1))}> &gt; </button>
+            {props.pageNo < pagesEndIndex ? <button onClick={handleChangePage.bind(null, (+props.pageNo + 1))}> &gt; </button> : null} 
         </div>
     );
 

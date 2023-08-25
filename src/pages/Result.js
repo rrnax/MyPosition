@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AppContext from "../AppContext";
 import FilterSearchBar from "../result_components/FilterSearchBar";
+import BookObject from "../data_classes/BookObject";
+import ShortcutBook from "../result_components/ShortcutBook";
 
 function Result() {
     const { page } = useParams();
@@ -10,30 +12,42 @@ function Result() {
 
     const [booksOnPage, setBooksOnPage] = useState([]);
     const [booksAmount, setBooksAmount] = useState(25);
-
-    useEffect(() => {
-        console.log(JSON.parse(localStorage.getItem('list')));
-    })
-    // useEffect(() => {
-    //     // let tempList = localStorage.getItem('sessionList');
-    //     // context.currentSearched.list = JSON.parse(tempList);
-    //     console.log(context.currentSearched.list);
-    //     console.log(JSON.parse(localStorage.getItem('list')));
-    //     context.currentSearched.list = JSON.parse(localStorage.getItem('list'));
-    //     console.log(context.currentSearched.list);
-    // });
+    const [firstRender, setFirstRender] = useState(true);
 
     //Correct deal with array of books
     useEffect(() => {
+        preperForRender();
         let startBookIndex = (page - 1) * booksAmount;
         let endBookIndex =  page * booksAmount;
         let tempList = context.currentSearched.list.slice(startBookIndex, endBookIndex);
         setBooksOnPage(tempList);
     }, [page, booksAmount]);
 
+    //Preper for case of render, we need to recreate objects for correct interprete
+    function preperForRender() {
+        if(firstRender){
+            let storeList = JSON.parse(localStorage.getItem('list'));
+            storeList = storeList.map(volume => {
+                return new BookObject(volume._title,
+                    volume._subtitle,
+                    volume._publisher,
+                    volume._authors,
+                    volume._categories,
+                    volume._description,
+                    volume._imagesLinks,
+                    volume._language,
+                    volume._pageAmount,
+                    volume._printType,
+                    volume._publishDate,
+                    volume._ratingCount);
+            });
+            context.currentSearched.copyList(storeList);
+            setFirstRender(false);
+        }
+    }
+
     const setAmountOfBooksOnPage = (amount) => {
         setBooksAmount(amount);
-        console.log(amount);
     };
 
     return (
@@ -42,11 +56,7 @@ function Result() {
             <h1>Results:</h1>
             <ul>
                 {booksOnPage.map((book, index) => (
-                    <li key={index}>
-                        <p> {book.title} </p>
-                        <p> {book.authors}</p>
-                        <p> {book.publishDate} </p>
-                    </li>
+                    <ShortcutBook key={index} volume={book} />
                 ))}
             </ul>
         </div>
