@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
-//Cumulate bar for results
+import { useNavigate } from "react-router-dom";
+
+//Miniature to show book on result list
 function ShortcutBook(props){
+    const navigate = useNavigate();
+
     const [volume, setVolume] = useState({});
 
     useEffect(() => {
-        console.log(props.volume);
-        setVolume(props.volume)
+        setVolume(props.volume);
     });
 
+    const showBook = () => {
+        console.log(props.position);
+        navigate(`/book/${props.position}`);
+    };
+
     return (
-        <div>
+        <div onClick={showBook}>
             <div>
                 <p>{volume.title}</p>
                 <p>{volume.authors}</p>
@@ -17,7 +25,10 @@ function ShortcutBook(props){
                 <p>{volume.categories}</p>
             </div>
             <div>
-
+                { (volume.imagesLinks !== undefined && volume.imagesLinks !== null) ? <img src={volume.imagesLinks.thumbnail} alt="book"/> : <p>brak</p>}
+            </div>
+            <div>
+                <p>{volume.description}</p>
             </div>
         </div>
     );

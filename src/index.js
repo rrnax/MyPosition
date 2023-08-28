@@ -30,7 +30,9 @@ export default function App() {
             <Route path='result'>
               <Route path=':page' element={<Result />}/>
             </Route>
-            <Route path='book' element={<Book />}/>
+            <Route path='book'>
+              <Route path=':no' element={<Book />}/>
+            </Route>
             <Route path='about' element={<About />}/>
             <Route path='tops' element={<Tops />}/>
           </Route>

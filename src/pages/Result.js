@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import AppContext from "../AppContext";
 import FilterSearchBar from "../result_components/FilterSearchBar";
 import BookObject from "../data_classes/BookObject";
@@ -9,6 +9,8 @@ function Result() {
     const { page } = useParams();
 
     const context = useContext(AppContext);
+
+    const navigate = useNavigate();
 
     const [booksOnPage, setBooksOnPage] = useState([]);
     const [booksAmount, setBooksAmount] = useState(25);
@@ -47,7 +49,18 @@ function Result() {
     }
 
     const setAmountOfBooksOnPage = (amount) => {
-        setBooksAmount(amount);
+        let actualPages = Math.floor((context.currentSearched.list.length/booksAmount) + 1);
+        let nextPages = Math.floor((context.currentSearched.list.length/amount) + 1);
+        if(actualPages > nextPages){
+            if(nextPages < page){
+                navigate(`/result/${nextPages}`);
+            } else {
+                navigate(`/result/${page}`);
+            }
+            setBooksAmount(amount);
+        } else {
+            setBooksAmount(amount);
+        }
     };
 
     return (
@@ -56,7 +69,7 @@ function Result() {
             <h1>Results:</h1>
             <ul>
                 {booksOnPage.map((book, index) => (
-                    <ShortcutBook key={index} volume={book} />
+                    <ShortcutBook key={index} volume={book} position={((page-1) * booksAmount + index)} />
                 ))}
             </ul>
         </div>

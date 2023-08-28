@@ -6,21 +6,17 @@ import { useNavigate } from "react-router-dom";
 function PageSwitcher(props){
     const context = useContext(AppContext);
 
-    const [pagesEndIndex, setPagesEndIndex] = useState(0);
+    const [pagesEndIndex, setPagesEndIndex] = useState(Math.floor((context.currentSearched.list.length/props.booksCount) + 1));
 
     const navigate = useNavigate();
 
     //Calculate end page
     useEffect(() => {
-        setPagesEndIndex(Math.floor(+context.currentSearched.list.length/+props.booksCount) + 1);
-        if(pagesEndIndex < props.pageNo){
-            console.log(pagesEndIndex);
-            if(pagesEndIndex === "0"){
-                setPagesEndIndex(1);
-            }
-            navigate(`/result/${pagesEndIndex}`);
-        }
-    }, [pagesEndIndex]);
+        //Timeout to wait for take data from local storage
+        setTimeout(() => {
+            setPagesEndIndex(Math.floor((context.currentSearched.list.length/props.booksCount) + 1));   
+        }, 10);
+    }, [props.booksCount]);
 
     const handleChangePage = (page) => {
         navigate(`/result/${page}`);
