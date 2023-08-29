@@ -6,7 +6,7 @@ import Search from './pages/Search';
 import Result from './pages/Result';
 import Book from './pages/Book';
 import About from './pages/About';
-import Tops from './pages/Tops';
+import History from './pages/History';
 import { AppProvider } from './AppContext';
 import BooksList from './data_classes/BooksList';
 
@@ -16,7 +16,9 @@ export default function App() {
     currentSearched: listOfVolumes,
     apiKey: "AIzaSyCATX2IZDWb8Gk2m0bu8DbSCOVk3SVGTuQ",
     searchUrl: "https://www.googleapis.com/books/v1/volumes?q=",
+    searchHistory: [],
   }
+  
 
   
 
@@ -34,7 +36,7 @@ export default function App() {
               <Route path=':no' element={<Book />}/>
             </Route>
             <Route path='about' element={<About />}/>
-            <Route path='tops' element={<Tops />}/>
+            <Route path='history' element={<History />}/>
           </Route>
         </Routes>
       </BrowserRouter>

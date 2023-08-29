@@ -7,9 +7,9 @@ class NavMenu extends React.Component {
         return <>
             <nav>
                 <ul>
-                    <Section name="/"/>
-                    <Section name="about"/>
-                    <Section name="tops"/>
+                    <Section name="search" pathTo="/"/>
+                    <Section name="about" pathTo="about"/>
+                    <Section name="history" pathTo="history"/>
                 </ul>
             </nav>
             <Outlet />

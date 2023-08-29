@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Section = ({ name }) => {
+const Section = ({ name, pathTo }) => {
     return ( 
         <li>
-            <Link to={ name }>{ name }</Link>
+            <Link to={ pathTo }>{ name }</Link>
         </li>
     );
 };
