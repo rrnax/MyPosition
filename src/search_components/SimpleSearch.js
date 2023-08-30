@@ -4,7 +4,7 @@ import AppContext from "../AppContext";
 import { useNavigate } from "react-router-dom";
 
 function SimpleSearch() {
-  const context = useContext(AppContext);
+  const { appState, setAppState } = useContext(AppContext);
 
   const [dataFromInput, setDataFromInput] = useState('');
 
@@ -26,18 +26,18 @@ function SimpleSearch() {
 
   //Loop for fetch all volumes
   async function downloadDataFromApi() {
-    context.currentSearched.clearList();
+    appState.currentSearched.clearList();
     let searchEnded = false;
     let j = 0;
     /* eslint-disable no-loop-func */
     while (!searchEnded) {
-      await fetch(context.searchUrl
+      await fetch(appState.searchUrl
         + dataFromInput
         + "&startIndex="
         + j
         + "&maxResults=40"
         + "&key="
-        + context.apiKey)
+        + appState.apiKey)
         .then(response => {
           if (!response.ok) {
             throw new Error("Incorrect response, bad response code.");
@@ -53,7 +53,7 @@ function SimpleSearch() {
           copyVolumes(data.items);
         })
     }
-    localStorage.setItem('list', JSON.stringify(context.currentSearched.list));
+    localStorage.setItem('list', JSON.stringify(appState.currentSearched.list));
     navigate('/result/1');
   }
 
@@ -61,7 +61,7 @@ function SimpleSearch() {
   function copyVolumes(volumeList) {
     volumeList.forEach(volume => {
       let tempVolume = scrapVolume(volume);
-      context.currentSearched.addVolume(tempVolume);
+      appState.currentSearched.addVolume(tempVolume);
     });
   }
 

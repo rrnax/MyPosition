@@ -8,7 +8,7 @@ import ShortcutBook from "../result_components/ShortcutBook";
 function Result() {
     const { page } = useParams();
 
-    const context = useContext(AppContext);
+    const { appState, setAppState } = useContext(AppContext);
 
     const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ function Result() {
         preperForRender();
         let startBookIndex = (page - 1) * booksAmount;
         let endBookIndex =  page * booksAmount;
-        let tempList = context.currentSearched.list.slice(startBookIndex, endBookIndex);
+        let tempList = appState.currentSearched.list.slice(startBookIndex, endBookIndex);
         setBooksOnPage(tempList);
     }, [page, booksAmount]);
 
@@ -43,14 +43,14 @@ function Result() {
                     volume._publishDate,
                     volume._ratingCount);
             });
-            context.currentSearched.copyList(storeList);
+            appState.currentSearched.copyList(storeList);
             setFirstRender(false);
         }
     }
 
     const setAmountOfBooksOnPage = (amount) => {
-        let actualPages = Math.floor((context.currentSearched.list.length/booksAmount) + 1);
-        let nextPages = Math.floor((context.currentSearched.list.length/amount) + 1);
+        let actualPages = Math.floor((appState.currentSearched.list.length/booksAmount) + 1);
+        let nextPages = Math.floor((appState.currentSearched.list.length/amount) + 1);
         if(actualPages > nextPages){
             if(nextPages < page){
                 navigate(`/result/${nextPages}`);

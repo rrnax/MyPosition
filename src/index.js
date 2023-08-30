@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavMenu from './pages/NavMenu';
@@ -12,19 +12,20 @@ import BooksList from './data_classes/BooksList';
 
 export default function App() {
   const listOfVolumes = new BooksList();
-  const appState = {
+  const [appState, setAppState] = useState({
     currentSearched: listOfVolumes,
     apiKey: "AIzaSyCATX2IZDWb8Gk2m0bu8DbSCOVk3SVGTuQ",
     searchUrl: "https://www.googleapis.com/books/v1/volumes?q=",
     searchHistory: [],
-  }
+  });
+  
   
 
   
 
   //Define routes for subpages.
   return (
-    <AppProvider value={appState}>
+    <AppProvider value={{ appState, setAppState }}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<NavMenu />}>

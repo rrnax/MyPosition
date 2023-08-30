@@ -4,7 +4,7 @@ import AppContext from "../AppContext";
 import { useNavigate } from "react-router-dom";
 
 function AdvancedSearch() {
-  const { context } = useContext(AppContext);
+  const { appState, setAppState } = useContext(AppContext);
 
   const [dataFromInputs, setDataFromInputs] = useState({
     intitle: "",
@@ -36,12 +36,12 @@ function AdvancedSearch() {
         udpateHistory(url, false);
         console.log(error);
     }
-    console.log(context.searchHistory);
+    console.log(appState.searchHistory);
   }
 
   //Create spcial advanced url for advanced Search
   function advancedUrlCreator() {
-    let createdUrl = context.searchUrl;
+    let createdUrl = appState.searchUrl;
     let searchDescription = "";
     if(dataFromInputs.intitle !== ""){
         createdUrl += 'intitle:' + dataFromInputs.intitle;
@@ -76,8 +76,8 @@ function AdvancedSearch() {
         status: status,
         keywords: dataFromInputs.searchDescription,
     }
-    let allHistory = [...context.searchHistory, historyObject];
-    // setContext(previousContent => ({
+    let allHistory = [...appState.searchHistory, historyObject];
+    // setAppState(previousContent => ({
     //     ...previousContent,
     //     searchHistory: allHistory,
     // }))
@@ -85,7 +85,7 @@ function AdvancedSearch() {
 
   //Loop for fetch all volumes
   async function downloadDataFromApi(url) {
-    context.currentSearched.clearList();
+    appState.currentSearched.clearList();
     let searchEnded = false;
     let j = 0;
     /* eslint-disable no-loop-func */
@@ -95,7 +95,7 @@ function AdvancedSearch() {
         + j
         + "&maxResults=40"
         + "&key="
-        + context.apiKey)
+        + appState.apiKey)
         .then(response => {
           if (!response.ok) {
             throw new Error("Incorrect response, bad response code.");
@@ -112,7 +112,7 @@ function AdvancedSearch() {
           copyVolumes(data.items);
         })
     }
-    localStorage.setItem('list', JSON.stringify(context.currentSearched.list));
+    localStorage.setItem('list', JSON.stringify(appState.currentSearched.list));
     navigate('/result/1');
   }
 
@@ -120,7 +120,7 @@ function AdvancedSearch() {
   function copyVolumes(volumeList) {
     volumeList.forEach(volume => {
       let tempVolume = scrapVolume(volume);
-      context.currentSearched.addVolume(tempVolume);
+      appState.currentSearched.addVolume(tempVolume);
     });
   }
 

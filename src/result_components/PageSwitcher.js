@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 //Component to navigate via pages of result
 function PageSwitcher(props){
-    const context = useContext(AppContext);
+    const { appState, setAppState } = useContext(AppContext);
 
-    const [pagesEndIndex, setPagesEndIndex] = useState(Math.floor((context.currentSearched.list.length/props.booksCount) + 1));
+    const [pagesEndIndex, setPagesEndIndex] = useState(Math.floor((appState.currentSearched.list.length/props.booksCount) + 1));
 
     const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ function PageSwitcher(props){
     useEffect(() => {
         //Timeout to wait for take data from local storage
         setTimeout(() => {
-            setPagesEndIndex(Math.floor((context.currentSearched.list.length/props.booksCount) + 1));   
+            setPagesEndIndex(Math.floor((appState.currentSearched.list.length/props.booksCount) + 1));   
         }, 10);
     }, [props.booksCount]);
 
