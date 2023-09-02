@@ -12,12 +12,11 @@ import BooksList from './data_classes/BooksList';
 
 export default function App() {
   const listOfVolumes = new BooksList();
-  const [appState, setAppState] = useState({
+  const [appState] = useState({
     currentSearched: listOfVolumes,
     apiKey: "AIzaSyCATX2IZDWb8Gk2m0bu8DbSCOVk3SVGTuQ",
     searchUrl: "https://www.googleapis.com/books/v1/volumes?q=",
-    searchHistory: [],
-  });
+    });
   
   
 
@@ -25,7 +24,7 @@ export default function App() {
 
   //Define routes for subpages.
   return (
-    <AppProvider value={{ appState, setAppState }}>
+    <AppProvider value={{ appState }}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<NavMenu />}>

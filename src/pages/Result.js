@@ -8,7 +8,7 @@ import ShortcutBook from "../result_components/ShortcutBook";
 function Result() {
     const { page } = useParams();
 
-    const { appState, setAppState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
 
     const navigate = useNavigate();
 

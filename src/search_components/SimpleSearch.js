@@ -4,8 +4,9 @@ import AppContext from "../AppContext";
 import { useNavigate } from "react-router-dom";
 
 function SimpleSearch() {
-  const { appState, setAppState } = useContext(AppContext);
+  const { appState } = useContext(AppContext);
 
+  const [warning, setWarning] = useState("");
   const [dataFromInput, setDataFromInput] = useState('');
 
   const navigate = useNavigate();
@@ -19,8 +20,31 @@ function SimpleSearch() {
     event.preventDefault();
     try {
       downloadDataFromApi();
+      udpateHistory(true);
+      setWarning("");
     } catch (error) {
+      udpateHistory(false);
       console.log(error);
+      setWarning("Nie mozna sie polaczyc z wyszukiwarka. Sproboj pozniej lub odswiez.");
+    }
+  }
+
+  function udpateHistory(status){
+    let historyObject = {
+        searchingUrl: appState.searchUrl + dataFromInput,
+        status: status,
+        keywords: dataFromInput,
+    }
+    let history = localStorage.getItem('history');
+    if(history === null){
+      let temp = [];
+      temp.push(historyObject);
+      localStorage.setItem('history', JSON.stringify(temp));
+    } else {
+      let historyJson = JSON.parse(history);
+      let temp = [...historyJson, historyObject];
+      localStorage.setItem('history', JSON.stringify(temp));
+      console.log(temp);
     }
   }
 
@@ -85,7 +109,7 @@ function SimpleSearch() {
     <form onSubmit={handleSubmit}>
       <input type="text" value={dataFromInput} placeholder="Wyszukaj" onChange={handleChange} />
       <input type="submit" value="Szukaj" />
-      <p></p>
+      <p>{ warning }</p>
     </form>
   )
 }

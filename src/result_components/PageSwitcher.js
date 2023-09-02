@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 //Component to navigate via pages of result
 function PageSwitcher(props){
-    const { appState, setAppState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
 
     const [pagesEndIndex, setPagesEndIndex] = useState(Math.floor((appState.currentSearched.list.length/props.booksCount) + 1));
 

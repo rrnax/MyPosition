@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-class History extends React.Component {
-    render() {
-        return <h1>History</h1>;
-    }
+function History(){
+    
+    const [history, setHistory] = useState([]);
+
+    useEffect(() => {
+        const storedHistory = JSON.parse(localStorage.getItem("history")) || [];
+        setHistory(storedHistory);
+    }, []);
+    
+    return (
+        <div>
+            <h1>History</h1>
+            { history.map((searching, index) => (
+                <li key={index}>{searching.searchingUrl}</li>
+            ))}
+        </div>
+    );
 }
+
 
 export default History;

@@ -4,8 +4,9 @@ import AppContext from "../AppContext";
 import { useNavigate } from "react-router-dom";
 
 function AdvancedSearch() {
-  const { appState, setAppState } = useContext(AppContext);
+  const { appState } = useContext(AppContext);
 
+  const [warning, setWarning] = useState("");
   const [dataFromInputs, setDataFromInputs] = useState({
     intitle: "",
     inauthor: "",
@@ -26,17 +27,18 @@ function AdvancedSearch() {
     }));
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     let url = advancedUrlCreator();
     try {
-        downloadDataFromApi(url);
+        await downloadDataFromApi(url);
         udpateHistory(url, true);
+        setWarning("");
     } catch (error) {
         udpateHistory(url, false);
         console.log(error);
+        setWarning("Nie mozna sie polaczyc z wyszukiwarka. Sproboj pozniej lub odswiez.");
     }
-    console.log(appState.searchHistory);
   }
 
   //Create spcial advanced url for advanced Search
@@ -72,15 +74,22 @@ function AdvancedSearch() {
 
   function udpateHistory(url, status){
     let historyObject = {
+        date: new Date(),
         searchingUrl: url,
         status: status,
         keywords: dataFromInputs.searchDescription,
     }
-    let allHistory = [...appState.searchHistory, historyObject];
-    // setAppState(previousContent => ({
-    //     ...previousContent,
-    //     searchHistory: allHistory,
-    // }))
+    let history = localStorage.getItem('history');
+    if(history === null){
+      let temp = [];
+      temp.push(historyObject);
+      localStorage.setItem('history', JSON.stringify(temp));
+    } else {
+      let historyJson = JSON.parse(history);
+      let temp = [...historyJson, historyObject];
+      let tempText = JSON.stringify(temp);
+      localStorage.setItem('history', tempText);
+    }
   }
 
   //Loop for fetch all volumes
@@ -148,6 +157,7 @@ function AdvancedSearch() {
       <input type="text" name="subject" value={dataFromInputs.subject} placeholder="Kategoria" onChange={handleInputsChange} />
       <input type="text" name="isbn" value={dataFromInputs.isbn} placeholder="ISBN" onChange={handleInputsChange} />
       <input type="submit" value="Szukaj" />
+      <p>{ warning }</p>
     </form>
   )
 }
