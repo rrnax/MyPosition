@@ -35,6 +35,7 @@ function SimpleSearch() {
 
   function udpateHistory(status){
     let historyObject = {
+        date: new Date(),
         searchingUrl: appState.searchUrl + dataFromInput,
         status: status,
         keywords: dataFromInput,
@@ -48,7 +49,6 @@ function SimpleSearch() {
       let historyJson = JSON.parse(history);
       let temp = [...historyJson, historyObject];
       localStorage.setItem('history', JSON.stringify(temp));
-      console.log(temp);
     }
   }
 
@@ -67,8 +67,7 @@ function SimpleSearch() {
         + "&key="
         + appState.apiKey)
         .then(response => {
-          if (!response.ok) {  const [isLoading, setIsLoading] = useState(false);
-
+          if (!response.ok) {
             throw new Error("Incorrect response, bad response code.");
           } else {
             return response.json();
@@ -115,7 +114,7 @@ function SimpleSearch() {
       <input type="text" className='volumen' value={dataFromInput} placeholder="Wyszukaj ksiazke" onChange={handleChange} />
       <input type="image" src="./assets/search_white.png" className='icon-search' alt="search" />
       <p>{ warning }</p>
-      { isLoading ? <div class="lds-hourglass"></div> : null }
+      { isLoading ? <div className="lds-hourglass"></div> : null }
     </form>
   )
 }

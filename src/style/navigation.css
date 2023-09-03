@@ -1,11 +1,11 @@
 .sticky-navigation {
-    width: 40px;
-    height: 200px;
+    width: 50px;
+    height: 300px;
     position: sticky;
     top: 100px;
     left: 20px;
     background-color: #222222;
-    border-radius: 20px;
+    border-radius: 25px;
 }
 
 .sticky-navigation ul{
@@ -20,8 +20,8 @@
 }
 
 .nav-icon {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin: auto;
     display: flex;
     justify-content: center;

@@ -1,0 +1,80 @@
+.upbar {
+    width: 100%;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.switch {
+    width: 70%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.tit {
+    margin: auto 5px;
+}
+
+.btn-change {
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    color: white;
+    font-family: ubuntu-bold;
+    font-size: 15px;
+    background-color: #222222;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.cap {
+    margin: 0 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.min-book {
+    width: 100%;
+    padding: 20px 10px;
+    margin-bottom: 30px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #222222;
+    border-radius: 20px 20px 0 0;
+    cursor: pointer;
+}
+
+.p-book {
+    padding: 5px;
+    background-color: #222222;
+    color: white;
+    border-radius: 10px;
+}
+
+.img-book {
+    border: 2px solid #222222;
+    margin-right: 30px;
+    border-radius: 20px 0 20px 0;
+}
+
+.emp {
+    margin-right: 40px;
+}
+
+.bk {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ibk {
+    width: 250px;
+    height: 400px;
+    margin-right: 100px;
+    border: 2px solid #222222;
+    border-radius: 40px 0 40px 0;
+}

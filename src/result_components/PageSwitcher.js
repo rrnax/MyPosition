@@ -24,16 +24,17 @@ function PageSwitcher(props){
 
     //Dynamic content in dependency
     return (
-        <div>
-            {props.pageNo - 1 > 0 ? <button onClick={handleChangePage.bind(null, (+props.pageNo - 1))}> &lt; </button> : null}
-            {props.pageNo > 2 ? <button onClick={handleChangePage.bind(null, 1)}> 1 </button> : null}
-            {props.pageNo > 3 ? <p> ... </p> : null}
-            {props.pageNo > 1 ? <button onClick={handleChangePage.bind(null, (+props.pageNo - 1))}> {+props.pageNo - 1} </button> : null}
-            <button onClick={handleChangePage.bind(null, +props.pageNo)}> {+props.pageNo} </button>
-            {pagesEndIndex - 1 > props.pageNo ? <button onClick={handleChangePage.bind(null, (+props.pageNo + 1))}> {(+props.pageNo + 1)} </button> : null}
-            {pagesEndIndex - 3 > props.pageNo ? <p>...</p> : null}
-            {pagesEndIndex - 2 > props.pageNo ? <button onClick={handleChangePage.bind(null, pagesEndIndex)}> {pagesEndIndex} </button> : null}
-            {props.pageNo < pagesEndIndex ? <button onClick={handleChangePage.bind(null, (+props.pageNo + 1))}> &gt; </button> : null} 
+        <div className="switch">
+            <h4 className="cap"> Strona: </h4>
+            {props.pageNo - 1 > 0 ? <button className="btn-change" onClick={handleChangePage.bind(null, (+props.pageNo - 1))}> &lt; </button> : null}
+            {props.pageNo > 2 ? <button className="btn-change" onClick={handleChangePage.bind(null, 1)}> 1 </button> : null}
+            {props.pageNo > 3 ? <p className="cap"></p> : null}
+            {props.pageNo > 1 ? <button className="btn-change" onClick={handleChangePage.bind(null, (+props.pageNo - 1))}> {+props.pageNo - 1} </button> : null}
+            <button className="btn-change" onClick={handleChangePage.bind(null, +props.pageNo)}> {+props.pageNo} </button>
+            {pagesEndIndex - 1 > props.pageNo ? <button className="btn-change" onClick={handleChangePage.bind(null, (+props.pageNo + 1))}> {(+props.pageNo + 1)} </button> : null}
+            {pagesEndIndex - 3 > props.pageNo ? <p className="cap"></p> : null}
+            {pagesEndIndex - 2 > props.pageNo ? <button className="btn-change" onClick={handleChangePage.bind(null, pagesEndIndex)}> {pagesEndIndex} </button> : null}
+            {props.pageNo < pagesEndIndex ? <button className="btn-change" onClick={handleChangePage.bind(null, (+props.pageNo + 1))}> &gt; </button> : null} 
         </div>
     );
 

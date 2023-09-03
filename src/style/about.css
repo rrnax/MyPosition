@@ -1,0 +1,20 @@
+.logo-a {
+    width: 400px;
+    height: 200px;
+    margin: 0;
+}
+
+.imgs-header {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.google {
+    width: 500px;
+}
+
+.desc {
+    color: #222222;
+    font-size: 20px;
+}

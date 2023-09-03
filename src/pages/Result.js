@@ -66,7 +66,6 @@ function Result() {
     return (
         <div>
             <FilterSearchBar setAmount={setAmountOfBooksOnPage} pageNo={page} booksCount={booksAmount}/>
-            <h1>Results:</h1>
             <ul>
                 {booksOnPage.map((book, index) => (
                     <ShortcutBook key={index} volume={book} position={((page-1) * booksAmount + index)} />

@@ -9,10 +9,11 @@ function BooksCounter(props){
     }
 
     return (
-        <div>
-            <button onClick={sendChange.bind(null, 10)}>10</button>
-            <button onClick={sendChange.bind(null, 25)}>25</button>
-            <button onClick={sendChange.bind(null, 50)}>50</button>
+        <div className="switch">
+            <h4 className="tit"> Liczba elmentow na stronie:</h4>
+            <button className="btn-change" onClick={sendChange.bind(null, 10)}>10</button>
+            <button className="btn-change" onClick={sendChange.bind(null, 25)}>25</button>
+            <button className="btn-change" onClick={sendChange.bind(null, 50)}>50</button>
         </div>
     );
 

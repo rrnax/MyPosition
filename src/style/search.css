@@ -1,12 +1,12 @@
 .simple-search {
     width: 100%;
-    height: 50px;
-    padding: 0 10px;
+    height: 60px;
+    padding: 0 30px;
     display: flex;
     background-color: #222222;
-    border-radius: 20px;
+    border-radius: 30px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     text-align: center;
 }
 
@@ -26,12 +26,14 @@
     color: white;
     border: none;
     cursor: pointer;
+    font-family: ubuntu-bold;
 }
 
 .simple {
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .ad-input {
@@ -49,24 +51,27 @@
     height: 25px;
     margin: 0 10px;
     padding: 5px;
-    border-radius: 10px;
+    border-radius: 17px;
     border: none;
+    font-family: ubuntu-bold;
 }
 
 
 .logo {
-    width: 300px;
-    height: 150px;
+    width: 800px;
+    height: 400px;
     margin: 90px auto;
     display: flex;
 }
 
 .ad-field {
+    width: 400px;
     height: 20px;
     margin: 0 3px;
     padding: 5px;
     border-radius: 10px;
     border: none;
+    font-family: ubuntu-bold;
 }
 
 /* loader */
