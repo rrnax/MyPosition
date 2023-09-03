@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function AdvancedSearch() {
   const { appState } = useContext(AppContext);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [warning, setWarning] = useState("");
   const [dataFromInputs, setDataFromInputs] = useState({
     intitle: "",
@@ -28,15 +29,18 @@ function AdvancedSearch() {
   }
 
   const handleSubmit = async (event) => {
+    setIsLoading(true);
     event.preventDefault();
     let url = advancedUrlCreator();
     try {
         await downloadDataFromApi(url);
         udpateHistory(url, true);
         setWarning("");
+        setIsLoading(false);
     } catch (error) {
         udpateHistory(url, false);
         console.log(error);
+        setIsLoading(false);
         setWarning("Nie mozna sie polaczyc z wyszukiwarka. Sproboj pozniej lub odswiez.");
     }
   }
@@ -151,13 +155,20 @@ function AdvancedSearch() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="intitle" value={dataFromInputs.intitle} placeholder="Tytuł" onChange={handleInputsChange} />
-      <input type="text" name="inauthor" value={dataFromInputs.inauthor} placeholder="Autor" onChange={handleInputsChange} />
-      <input type="text" name="inpublisher" value={dataFromInputs.inpublisher} placeholder="Wydawca" onChange={handleInputsChange} />
-      <input type="text" name="subject" value={dataFromInputs.subject} placeholder="Kategoria" onChange={handleInputsChange} />
-      <input type="text" name="isbn" value={dataFromInputs.isbn} placeholder="ISBN" onChange={handleInputsChange} />
-      <input type="submit" value="Szukaj" />
+      <div className="ad-input">
+        <input type="text" className="ad-field" name="intitle" value={dataFromInputs.intitle} placeholder="Tytuł" onChange={handleInputsChange} />
+       <input type="text" className="ad-field" name="inauthor" value={dataFromInputs.inauthor} placeholder="Autor" onChange={handleInputsChange} />
+      </div>
+      <div className="ad-input">
+        <input type="text" className="ad-field" name="inpublisher" value={dataFromInputs.inpublisher} placeholder="Wydawca" onChange={handleInputsChange} />
+        <input type="text" className="ad-field" name="subject" value={dataFromInputs.subject} placeholder="Kategoria" onChange={handleInputsChange} />
+      </div>
+      <div className="ad-input">
+        <input type="text" className="ad-field" name="isbn" value={dataFromInputs.isbn} placeholder="ISBN" onChange={handleInputsChange} />
+      </div>
+        <input type="image" src="./assets/search_white.png" className='icon-search' alt="search" />
       <p>{ warning }</p>
+      { isLoading ? <div class="lds-hourglass"></div> : null }
     </form>
   )
 }

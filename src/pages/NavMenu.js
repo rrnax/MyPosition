@@ -1,20 +1,34 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
-import Section from "../nav_components/Section";
+import { Link, Outlet } from "react-router-dom";
 
 import "../style/navigation.css";
+import "../style/appBack.css"
 
 class NavMenu extends React.Component {
     render() {
         return <>
             <nav className="sticky-navigation">
                 <ul>
-                    <Section name="search" pathTo="/"/>
-                    <Section name="about" pathTo="about"/>
-                    <Section name="history" pathTo="history"/>
+                    <li>
+                        <Link to="/">
+                            <img className="nav-icon" src="./assets/search_white.png" alt="Search"/>
+                        </Link> 
+                    </li>
+                    <li>
+                        <Link to="about">
+                            <img className='nav-icon' src="./assets/info_white.png" alt="Info"/>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="history">
+                            <img className='nav-icon' src="./assets/loop_white.png" alt="loop"/>
+                        </Link>
+                    </li>
                 </ul>
             </nav>
-            <Outlet />
+            <div className='mid-container'>
+                <Outlet />
+            </div>
         </>
     }
 }

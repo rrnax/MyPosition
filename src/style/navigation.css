@@ -2,10 +2,10 @@
     width: 40px;
     height: 200px;
     position: sticky;
-    top: 20%;
-    left: 50px;
+    top: 100px;
+    left: 20px;
     background-color: #222222;
-    border-radius: 15px;
+    border-radius: 20px;
 }
 
 .sticky-navigation ul{
@@ -16,4 +16,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    list-style: none;
+}
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
 }

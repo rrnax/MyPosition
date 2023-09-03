@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function SimpleSearch() {
   const { appState } = useContext(AppContext);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [warning, setWarning] = useState("");
   const [dataFromInput, setDataFromInput] = useState('');
 
@@ -16,15 +17,18 @@ function SimpleSearch() {
     setDataFromInput(event.target.value);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     try {
-      downloadDataFromApi();
+      await downloadDataFromApi();
       udpateHistory(true);
       setWarning("");
+      setIsLoading(false);
     } catch (error) {
       udpateHistory(false);
       console.log(error);
+      setIsLoading(false);
       setWarning("Nie mozna sie polaczyc z wyszukiwarka. Sproboj pozniej lub odswiez.");
     }
   }
@@ -63,7 +67,8 @@ function SimpleSearch() {
         + "&key="
         + appState.apiKey)
         .then(response => {
-          if (!response.ok) {
+          if (!response.ok) {  const [isLoading, setIsLoading] = useState(false);
+
             throw new Error("Incorrect response, bad response code.");
           } else {
             return response.json();
@@ -106,10 +111,11 @@ function SimpleSearch() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={dataFromInput} placeholder="Wyszukaj" onChange={handleChange} />
-      <input type="submit" value="Szukaj" />
+    <form onSubmit={handleSubmit} className='simple'>
+      <input type="text" className='volumen' value={dataFromInput} placeholder="Wyszukaj ksiazke" onChange={handleChange} />
+      <input type="image" src="./assets/search_white.png" className='icon-search' alt="search" />
       <p>{ warning }</p>
+      { isLoading ? <div class="lds-hourglass"></div> : null }
     </form>
   )
 }
