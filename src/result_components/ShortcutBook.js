@@ -15,7 +15,7 @@ function ShortcutBook(props){
 
     const showBook = () => {
         console.log(props.position);
-        navigate(`book/${props.position}`);
+        navigate(`/MyPosition/book/${props.position}`);
     };
 
     return (

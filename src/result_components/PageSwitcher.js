@@ -19,7 +19,7 @@ function PageSwitcher(props){
     }, [props.booksCount]);
 
     const handleChangePage = (page) => {
-        navigate(`result/${page}`);
+        navigate(`/MyPosition/result/${page}`);
     }
 
     //Dynamic content in dependency
