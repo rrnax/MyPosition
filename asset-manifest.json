@@ -1,7 +1,7 @@
 {
   "main.css": "/MyPosition/static/css/main.3aef2fea.chunk.css",
-  "main.js": "/MyPosition/static/js/main.7f20aee6.chunk.js",
-  "main.js.map": "/MyPosition/static/js/main.7f20aee6.chunk.js.map",
+  "main.js": "/MyPosition/static/js/main.88356c06.chunk.js",
+  "main.js.map": "/MyPosition/static/js/main.88356c06.chunk.js.map",
   "static/js/1.8bcfbbd0.chunk.js": "/MyPosition/static/js/1.8bcfbbd0.chunk.js",
   "static/js/1.8bcfbbd0.chunk.js.map": "/MyPosition/static/js/1.8bcfbbd0.chunk.js.map",
   "runtime~main.js": "/MyPosition/static/js/runtime~main.7fa4432e.js",
@@ -12,6 +12,6 @@
   "static/media/google_books.png": "/MyPosition/static/media/google_books.2b3d06b2.png",
   "static/css/main.3aef2fea.chunk.css.map": "/MyPosition/static/css/main.3aef2fea.chunk.css.map",
   "index.html": "/MyPosition/index.html",
-  "precache-manifest.2bf3dbe7a0dd05b070f74e77fbe631df.js": "/MyPosition/precache-manifest.2bf3dbe7a0dd05b070f74e77fbe631df.js",
+  "precache-manifest.4839bec5106af9993772b75353eec3f9.js": "/MyPosition/precache-manifest.4839bec5106af9993772b75353eec3f9.js",
   "service-worker.js": "/MyPosition/service-worker.js"
 }
