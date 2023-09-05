@@ -53,9 +53,9 @@ function Result() {
         let nextPages = Math.floor((appState.currentSearched.list.length/amount) + 1);
         if(actualPages > nextPages){
             if(nextPages < page){
-                navigate(`/result/${nextPages}`);
+                navigate(`result/${nextPages}`);
             } else {
-                navigate(`/result/${page}`);
+                navigate(`result/${page}`);
             }
             setBooksAmount(amount);
         } else {

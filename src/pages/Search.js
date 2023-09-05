@@ -3,6 +3,8 @@ import SimpleSearch from '../search_components/SimpleSearch';
 import AdvancedSearch from '../search_components/AdvancedSearch';
 
 import '../style/search.css';
+import logo from "../assets/mylogo_2.png";
+
 
 function Search() {
   const [isAdvanced, setAdvanced] = useState(false);
@@ -17,7 +19,7 @@ function Search() {
         <button className='btn-search' onClick={changeSearchKind}>{ isAdvanced ? "<- Proste" : "Zawansowane"}</button>  
         { isAdvanced ? <AdvancedSearch/> : <SimpleSearch/> }
       </div>
-      <img src='./assets/mylogo_2.png' className='logo' alt='logo' />
+      <img src={logo} className='logo' alt='logo' />
     </div>
   );
 }
