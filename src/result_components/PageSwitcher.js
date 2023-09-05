@@ -19,7 +19,7 @@ function PageSwitcher(props){
     }, [props.booksCount]);
 
     const handleChangePage = (page) => {
-        let temp = "/MyPosition/book/result/" + page;
+        let temp = "/MyPosition/result/" + page;
         navigate(temp);
     }
 
