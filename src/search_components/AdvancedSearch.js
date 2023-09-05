@@ -3,6 +3,9 @@ import BookObject from "../data_classes/BookObject";
 import AppContext from "../AppContext";
 import { useNavigate } from "react-router-dom";
 
+import loupe from "../assets/search_white.png";
+
+
 function AdvancedSearch() {
   const { appState } = useContext(AppContext);
 
@@ -166,7 +169,7 @@ function AdvancedSearch() {
       <div className="ad-input">
         <input type="text" className="ad-field" name="isbn" value={dataFromInputs.isbn} placeholder="ISBN" onChange={handleInputsChange} />
       </div>
-        <input type="image" src="./assets/search_white.png" className='icon-search' alt="search" />
+        <input type="image" src={loupe} className='icon-search' alt="search" />
       <p>{ warning }</p>
       { isLoading ? <div class="lds-hourglass"></div> : null }
     </form>

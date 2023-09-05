@@ -17,18 +17,14 @@ export default function App() {
     currentSearched: listOfVolumes,
     apiKey: "AIzaSyCATX2IZDWb8Gk2m0bu8DbSCOVk3SVGTuQ",
     searchUrl: "https://www.googleapis.com/books/v1/volumes?q=",
-    });
-  
-  
-
-  
+    }); 
 
   //Define routes for subpages.
   return (
     <AppProvider value={{ appState }}>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<NavMenu />}>
+          <Route path='/MyPosition' element={<NavMenu />}>
             <Route index element={<Search />}/>
             <Route path='result'>
               <Route path=':page' element={<Result />}/>

@@ -3,6 +3,9 @@ import BookObject from "../data_classes/BookObject";
 import AppContext from "../AppContext";
 import { useNavigate } from "react-router-dom";
 
+import loupe from "../assets/search_white.png";
+
+
 function SimpleSearch() {
   const { appState } = useContext(AppContext);
 
@@ -112,7 +115,7 @@ function SimpleSearch() {
   return (
     <form onSubmit={handleSubmit} className='simple'>
       <input type="text" className='volumen' value={dataFromInput} placeholder="Wyszukaj ksiazke" onChange={handleChange} />
-      <input type="image" src="./assets/search_white.png" className='icon-search' alt="search" />
+      <input type="image" src={loupe} className='icon-search' alt="search" />
       <p>{ warning }</p>
       { isLoading ? <div className="lds-hourglass"></div> : null }
     </form>
