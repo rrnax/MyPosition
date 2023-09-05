@@ -13,7 +13,7 @@ class NavMenu extends React.Component {
             <nav className="sticky-navigation">
                 <ul>
                     <li>
-                        <Link to="/">
+                        <Link to="/MyPosition">
                             <img className="nav-icon" src={loupe} alt="Search"/>
                         </Link> 
                     </li>

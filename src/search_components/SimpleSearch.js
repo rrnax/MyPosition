@@ -85,7 +85,7 @@ function SimpleSearch() {
         })
     }
     localStorage.setItem('list', JSON.stringify(appState.currentSearched.list));
-    navigate('/result/1');
+    navigate('result/1');
   }
 
   //Copy list of volumes to global context
